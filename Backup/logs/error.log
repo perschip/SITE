@@ -1,0 +1,9 @@
+[2025-05-12 03:17:05] Uncaught Exception: Class "EbayAPI" not found | Context: {"file":"\/www\/wwwroot\/www.tristatecards.com\/test-comprehensive.php","line":40,"trace":"#0 {main}"}
+[2025-05-12 03:17:37] Uncaught Exception: Class "EbayAPI" not found | Context: {"file":"\/www\/wwwroot\/www.tristatecards.com\/admin\/listings.php","line":84,"trace":"#0 {main}"}
+[2025-05-12 03:17:50] Uncaught Exception: Class "EbayAPI" not found | Context: {"file":"\/www\/wwwroot\/www.tristatecards.com\/admin\/sync-ebay.php","line":13,"trace":"#0 {main}"}
+[2025-05-12 03:18:45] Uncaught Exception: Class "EbayAPI" not found | Context: {"file":"\/www\/wwwroot\/www.tristatecards.com\/admin\/debug-sync.php","line":25,"trace":"#0 {main}"}
+[2025-05-12 03:21:04] Uncaught Exception: Call to undefined method EbayAPI::getFeaturedListings() | Context: {"file":"\/www\/wwwroot\/www.tristatecards.com\/api\/listings.php","line":21,"trace":"#0 {main}"}
+[2025-05-12 03:24:07] Uncaught Exception: Call to undefined method EbayAPI::getFeaturedListings() | Context: {"file":"\/www\/wwwroot\/www.tristatecards.com\/api\/listings.php","line":21,"trace":"#0 {main}"}
+[2025-05-12 03:27:07] Uncaught Exception: Call to private method EbayAPI::makeRequest() from global scope | Context: {"file":"\/www\/wwwroot\/www.tristatecards.com\/test-ebay-browse.php","line":81,"trace":"#0 {main}"}
+[2025-05-12 03:30:39] Uncaught Exception: Call to undefined method EbayAPI::searchStoreItems() | Context: {"file":"\/www\/wwwroot\/www.tristatecards.com\/test-real-ebay.php","line":42,"trace":"#0 {main}"}
+[2025-05-12 04:03:08] Uncaught Exception: Call to undefined method EbayAPI::searchStoreItems() | Context: {"file":"\/www\/wwwroot\/www.tristatecards.com\/test-real-ebay.php","line":42,"trace":"#0 {main}"}

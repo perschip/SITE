@@ -1,0 +1,73 @@
+<?php
+// admin/index.php
+session_start();
+require_once '../config/config.php';
+
+// Check if user is logged in
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header('Location: login.php');
+    exit;
+}
+
+require_once 'includes/header.php';
+?>
+
+<div class="admin-container">
+    <h1>Admin Dashboard</h1>
+    
+    <div class="admin-stats">
+        <div class="stat-card">
+            <h3>eBay Listings</h3>
+            <span class="stat-number">12</span>
+        </div>
+        <div class="stat-card">
+            <h3>Blog Posts</h3>
+            <span class="stat-number">5</span>
+        </div>
+        <div class="stat-card">
+            <h3>Pages</h3>
+            <span class="stat-number">8</span>
+        </div>
+    </div>
+    
+    <div class="admin-actions">
+        <h2>Quick Actions</h2>
+        <div class="action-buttons">
+            <a href="add-post.php" class="btn">Add Blog Post</a>
+            <a href="add-page.php" class="btn">Add Page</a>
+            <a href="manage-ebay.php" class="btn">Manage eBay Settings</a>
+        </div>
+    </div>
+    
+    <div class="recent-activity">
+        <h2>Recent Activity</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Action</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2023-06-15 14:30</td>
+                    <td>Blog Post Added</td>
+                    <td>New Product Release</td>
+                </tr>
+                <tr>
+                    <td>2023-06-14 10:15</td>
+                    <td>Page Updated</td>
+                    <td>About Us</td>
+                </tr>
+                <tr>
+                    <td>2023-06-13 16:45</td>
+                    <td>eBay Settings Updated</td>
+                    <td>API Credentials</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<?php require_once 'includes/footer.php'; ?>

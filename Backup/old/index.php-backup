@@ -1,0 +1,46 @@
+<?php
+// index.php - Main entry point for the website
+// Require configuration files and essential includes
+require_once 'config/config.php';
+require_once 'includes/functions.php';
+
+// Set default page title
+$pageTitle = 'Home';
+
+// Include header
+require_once 'includes/header.php';
+
+// Router logic - determine which page to display
+$page = isset($_GET['page']) ? $_GET['page'] : 'home';
+
+// Handle specific page types
+if (strpos($page, 'single-post') !== false && isset($_GET['slug'])) {
+    include 'pages/single-post.php';
+} elseif (strpos($page, 'single-page') !== false && isset($_GET['slug'])) {
+    include 'pages/single-page.php';
+} else {
+    // Route to regular pages
+    switch ($page) {
+        case 'home':
+            $pageScripts = ['whatnot.js', 'ebay.js'];
+            include 'pages/home.php';
+            break;
+        case 'ebay':
+            $pageScripts = ['ebay.js'];
+            include 'pages/ebay.php';
+            break;
+        case 'blog':
+            include 'pages/blog.php';
+            break;
+        case 'contact':
+            include 'pages/contact.php';
+            break;
+        default:
+            $pageTitle = 'Page Not Found';
+            include 'pages/404.php';
+    }
+}
+
+// Include footer
+require_once 'includes/footer.php';
+?>

@@ -1,0 +1,22 @@
+<?php
+// config/config.php
+// Database configuration
+define('DB_HOST', 'localhost');
+define('DB_USER', 'tristate_cards_admin');
+define('DB_PASS', '$Yankees100');
+define('DB_NAME', 'tristate_cards');
+
+// eBay API configuration
+define('EBAY_APP_ID', 'PaulPers-TSCBOT-PRD-c0e716bda-e070fe46');
+define('EBAY_DEV_ID', '25a2a87a-6273-4022-855d-66da51ab543e');
+define('EBAY_CERT_ID', 'PRD-0e716bdad618-d1f5-45d0-8ff1-53af');
+define('EBAY_OAUTH_TOKEN', 'v^1.1#i^1#f^0#p^1#r^0#I^3#t^H4sIAAAAAAAA/+VYe2wURRjv9QGpcBgjwYKNORb4g5Ldnd2954Y7cn0AF6/tlTsLVAnO7s62a/d2l9092oKaUoEAakywMfJIrAmKivEZJT4iEUWJNEFREmJiQDECNhhEfIM6uy2lrYRXL7GJ989lvvnmm9/vN983Mzugc1xpxfqF63/1esYX9nSCzkKPh5kASseVzJlUVDitpAAMcfD0dM7sLO4qOjnXglnV4Bchy9A1C/nas6pm8a4xSuRMjdehpVi8BrPI4m2RT8drkzxLAd4wdVsXdZXwJaqjRMgvI5GFYYkLsxInIWzVLsbM6FECBoMCKyI5HGQ4hpNk3G9ZOZTQLBtqdpRgARsggZ9kwxmW4/2AZwEVjESaCF8jMi1F17ALBYiYC5d3x5pDsF4ZKrQsZNo4CBFLxOen6+OJ6pq6zFx6SKzYgA5pG9o5a3irSpeQrxGqOXTlaSzXm0/nRBFZFkHH+mcYHpSPXwRzA/BdqSFWMBASsMwRrCjw50XK+bqZhfaVcTgWRSJl15VHmq3YHVdTFKsh3IdEe6BVh0Mkqn3OX0MOqoqsIDNK1FTGl8ZTKSKWgjk1hUGSmXRVZX2GTC2qJkWAQkxQkCCJQAjIyB8cmKY/1oDII+ap0jVJcSSzfHW6XYkwZjRSGW6IMtipXqs347Lt4Bn0i2QAc1HBcKDJWdL+NczZLZqzqiiLZfC5zavrPzjatk1FyNloMMLIDlcgvNKGoUjEyE43EweSp92KEi22bfA03dbWRrVxlG420ywADL2kNpkWW1AWEq6vU+uOv3L1AaTiUhFxEWN/3u4wMJZ2nKkYgNZMxAJsgAtzA7oPhxUbaf2XYQhneng95Ks+mIAEAJJDcpARZBZF8lEfsYEUpR0cSIAdZBaarcg2VCgiUsR5lssiU5F4LiCzXFhGpBSMyKQ/IsukEJCCJCMjBBASBDES/v+UybUmehqJJrLzlOl5yvIVNYmOuuqGBZWZRK1kBlJViAspsKFujpCiI6GklaxbYFSbq5R4ZUP0WmvhsuSrVAUrk8Hz50sAp9bzI8JC3bKRNCp6aVE3UEpXFbFjbC0wZ0opaNodaaSq2DAqknHDSORrp84TvevaJG6MdT7Pp//kbLosK8tJ2LHFyhlv4QDQUCjn9KFEPUvrEF87aKfWsXm5i3pUvBV8Zx1TrDHJfraK1H/ZpFzKlLVSpExk6TkT37Opeuf2ldFbkYZPM9vUVRWZjcyoqzmbzdlQUNFYK+s8JLgCx9hRy4T8gXCYC7JgVLxE9yBdPta2pPxtxMXzrvNCTQ//uI8VuD+my7MXdHneK/R4wFwwi5kBpo8ruqu4aOI0S7ERpUCZspRmDX+zmohqRR0GVMzCWwsOTkpKaxYmf+4UcrsXn5sXLvAOeVvoWQbKBl8XSouYCUOeGkD5pZ4S5ubbvGwA+Nkwy/kBC5rAjEu9xcyU4snlrVt6V6y+8P60b/Rb4OtvQnb3U7OBd9DJ4ykpKO7yFMzaIGw2Pjt4bM+5M28s2fpB+zvR3o9aspnNP5C/sY/88v2+83+8QpV9fBb13X1gcu/4wO3rylduf7ly99Ijyyed9XZdyHk3b/2r9sHHdyw5sX/X0Z6lmUN1xYsmzdhYsbf771cDv2/zHdq+7/47kqt2lj2z9oS0ZtmucJ/36cPHJ1QcqNXeuse7Ntn8LJpqP3bnpqP7T5V4j59qn0pvfGFd39fqmjNfzgTfPfbVnk/PrX+RvnfW9Nmnt3++5fz4P5/vfuDoujmbXoNPlC8uzezoK/WVTCmbeKyipfvAQ7GdD/c+eqT38E87P5z45LfsSf9zp+kFhzd80vZFw+Lp9N7aPZ2rhZrmxm3dTW//eNPpl95tjrT3r+U/tIbKcfURAAA=');
+
+// Whatnot configuration
+define('WHATNOT_USERNAME', 'tscardbreaks');
+define('EBAY_SELLER_ID', 'tristatecardsnj');
+
+// Site configuration
+define('SITE_NAME', 'Tristate Cards');
+define('SITE_URL', 'https://tristatecards.com');
+?>

@@ -1,0 +1,13 @@
+ # .htaccess
+RewriteEngine On
+
+# Handle front controller pattern
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^blog/([a-zA-Z0-9-]+)$ index.php?page=single-post&slug=$1 [L,QSA]
+RewriteRule ^page/([a-zA-Z0-9-]+)$ index.php?page=single-page&slug=$1 [L,QSA]
+RewriteRule ^([a-zA-Z0-9-]+)$ index.php?page=$1 [L,QSA]
+
+# PHP settings
+php_flag display_errors on
+php_value error_reporting E_ALL

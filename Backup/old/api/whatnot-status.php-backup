@@ -1,0 +1,53 @@
+<?php
+// api/whatnot-status.php
+header('Content-Type: application/json');
+require_once '../config/config.php';
+
+// Function to check if user is live on Whatnot
+function checkWhatnotStatus() {
+    $username = tscardbreaks;
+    
+    // In a real implementation, you would use Whatnot's API if available
+    // or scrape their website to check if the user is currently streaming
+    
+    // For demonstration purposes, we'll use a simple approach
+    // by checking if the user's profile page contains live indicators
+    
+    $url = "https://www.whatnot.com/user/{$username}";
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36');
+    
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    // Check if the string "LIVE" appears in the page
+    // This is a simple approach and may need refinement
+    $isLive = strpos($response, 'LIVE') !== false;
+    
+    // Extract stream title if available (this would need to be adjusted based on actual page structure)
+    $streamTitle = '';
+    if ($isLive) {
+        // Simple regex to try to extract the stream title
+        // This would need to be adjusted based on actual page HTML structure
+        preg_match('/<h1[^>]*>(.*?)<\/h1>/i', $response, $matches);
+        $streamTitle = isset($matches[1]) ? $matches[1] : 'Live Stream';
+        
+        // Extract viewer count if available
+        preg_match('/(\d+)\s*viewers/i', $response, $viewerMatches);
+        $viewerCount = isset($viewerMatches[1]) ? $viewerMatches[1] : '0';
+    }
+    
+    return [
+        'isLive' => $isLive,
+        'username' => $username,
+        'streamTitle' => $isLive ? $streamTitle : '',
+        'viewerCount' => $isLive ? $viewerCount : '0'
+    ];
+}
+
+// Get status and return as JSON
+echo json_encode(checkWhatnotStatus());
+?>

@@ -1,0 +1,50 @@
+2025-05-12 03:13:08 - {
+    "timestamp": "2025-05-12 03:13:08",
+    "session": {
+        "admin_id": 2,
+        "logged_in": true
+    },
+    "step1": "Creating EbayAPI instance",
+    "step2": "Calling updateLocalListings",
+    "step3": "Result received: false",
+    "error": "updateLocalListings returned false"
+}
+
+2025-05-12 03:13:20 - {
+    "timestamp": "2025-05-12 03:13:20",
+    "session": {
+        "admin_id": 2,
+        "logged_in": true
+    },
+    "step1": "Creating EbayAPI instance",
+    "step2": "Calling updateLocalListings",
+    "step3": "Result received: false",
+    "error": "updateLocalListings returned false"
+}
+
+2025-05-12 03:15:12 - {
+    "timestamp": "2025-05-12 03:15:12",
+    "session": {
+        "admin_id": 2,
+        "logged_in": true
+    },
+    "step1": "Creating EbayAPI instance",
+    "step2": "Calling updateLocalListings",
+    "step3": "Result received: false",
+    "error": "updateLocalListings returned false"
+}
+
+2025-05-12 03:21:14 - {
+    "timestamp": "2025-05-12 03:21:14",
+    "session": {
+        "admin_id": 2,
+        "logged_in": true
+    },
+    "step1": "Creating EbayAPI instance",
+    "step2": "Calling updateLocalListings",
+    "step3": "Result received: true",
+    "step4": "Updating last sync time",
+    "step5": "Getting listings count",
+    "active_listings": 6
+}
+

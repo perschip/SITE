@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup - Tristate Cards</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .setup-form {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background-color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .checkbox-group input {
+            width: auto;
+            margin-right: 0.5rem;
+        }
+        
+        .help-text {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+        
+        .submit-button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .submit-button:hover {
+            background-color: #0096c2;
+        }
+        
+        .instruction-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .instruction-section h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .instruction-section ol {
+            padding-left: 1.5rem;
+        }
+        
+        .instruction-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .next-steps {
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .config-saved .next-steps {
+            display: block;
+        }
+        
+        .environment-switch {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #eee;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="img/logo.png" alt="Tristate Cards Logo" class="logo">
+        <h1>Tristate Cards</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pages/about.html">About</a></li>
+                <li><a href="pages/contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h2>Website Configuration</h2>
+        
+        <div class="instruction-section">
+            <h3>Enter Your Credentials</h3>
+            <p>This page allows you to configure your website settings without editing any code. You only need to do this once.</p>
+            
+            <h4>eBay Settings</h4>
+            <ol>
+                <li>Enter your eBay <strong>Seller ID</strong> (your eBay username)</li>
+                <li>Enter your <strong>App ID</strong>, <strong>Dev ID</strong>, and <strong>Cert ID</strong> from your eBay Developer account</li>
+                <li>Select whether to use Sandbox (testing) or Production environment</li>
+                <li>Make sure you have set up the following in your eBay Developer account:
+                    <ul>
+                        <li>Redirect URL for success: <code id="success-url">https://your-domain.com/auth-success.html</code></li>
+                        <li>Redirect URL for failure: <code id="failure-url">https://your-domain.com/auth-declined.html</code></li>
+                        <li>Privacy Policy URL: <code id="privacy-url">https://your-domain.com/privacy-policy.html</code></li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <h4>Whatnot Settings</h4>
+            <ol>
+                <li>Enter your Whatnot username to enable live stream status</li>
+            </ol>
+        </div>
+        
+        <form id="setup-form" class="setup-form">
+            <h3>eBay Configuration</h3>
+            
+            <div class="environment-switch">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="ebay-use-sandbox" name="ebay-use-sandbox">
+                    <label for="ebay-use-sandbox">Use eBay Sandbox Environment (for testing)</label>
+                </div>
+                <p class="help-text">Recommended for initial setup. Make sure you use the corresponding App ID and Cert ID for the environment you select.</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="ebay-seller-id">eBay Seller ID</label>
+                <input type="text" id="ebay-seller-id" name="ebay-seller-id" placeholder="Your eBay seller username">
+                <p class="help-text">This is your eBay username that you use to sell items</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="ebay-app-id">eBay App ID (Client ID)</label>
+                <input type="text" id="ebay-app-id" name="ebay-app-id" placeholder="e.g., YourCompan-YourApp-PRD-a1b2c3d4e-1a2b3c4d">
+                <p class="help-text">From your eBay Developer account > Application Keys</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="ebay-dev-id">eBay Dev ID</label>
+                <input type="text" id="ebay-dev-id" name="ebay-dev-id" placeholder="e.g., a1b2c3d4-e5f6-7g8h-9i0j-a1b2c3d4e5f6">
+                <p class="help-text">From your eBay Developer account > Application Keys</p>
+            </div>
+            
+            <div class="form-group">
+                <label for="ebay-cert-id">eBay Cert ID (Client Secret)</label>
+                <input type="text" id="ebay-cert-id" name="ebay-cert-id" placeholder="e.g., PRD-1a2b3c4d5e6f-7g8h-9i0j-1k2l-3m4n5o6p7q8r">
+                <p class="help-text">From your eBay Developer account > Application Keys</p>
+            </div>
+            
+            <h3>Whatnot Configuration</h3>
+            
+            <div class="form-group">
+                <label for="whatnot-username">Whatnot Username</label>
+                <input type="text" id="whatnot-username" name="whatnot-username" placeholder="Your Whatnot username">
+            </div>
+            
+            <button type="submit" class="submit-button">Save Configuration</button>
+            
+            <div class="next-steps">
+                <h3>Configuration Saved!</h3>
+                <p>Your configuration has been saved. Next steps:</p>
+                <ol>
+                    <li>Make sure you've added the redirect URLs and privacy policy URL to your eBay Developer account</li>
+                    <li>Go to the <a href="index.html">home page</a></li>
+                    <li>Click "Authenticate with eBay" when prompted</li>
+                    <li>Log in to your eBay account</li>
+                    <li>Your listings will then be displayed automatically</li>
+                </ol>
+            </div>
+        </form>
+    </div>
+    
+    <footer>
+        &copy; <span id="current-year"></span> Tristate Cards. All Rights Reserved.
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Initialize the form with any saved values
+        document.addEventListener('DOMContentLoaded', () => {
+            // Display the correct URLs
+            const domain = window.location.origin;
+            document.getElementById('success-url').textContent = domain + '/auth-success.html';
+            document.getElementById('failure-url').textContent = domain + '/auth-declined.html';
+            document.getElementById('privacy-url').textContent = domain + '/privacy-policy.html';
+            
+            // Load saved values
+            const ebaySellerId = localStorage.getItem('ebay_seller_id');
+            const ebayAppId = localStorage.getItem('ebay_app_id');
+            const ebayDevId = localStorage.getItem('ebay_dev_id');
+            const ebayCertId = localStorage.getItem('ebay_cert_id');
+            const ebayUseSandbox = localStorage.getItem('ebay_use_sandbox') === 'true';
+            const whatnotUsername = localStorage.getItem('whatnot_username');
+            
+            if (ebaySellerId) document.getElementById('ebay-seller-id').value = ebaySellerId;
+            if (ebayAppId) document.getElementById('ebay-app-id').value = ebayAppId;
+            if (ebayDevId) document.getElementById('ebay-dev-id').value = ebayDevId;
+            if (ebayCertId) document.getElementById('ebay-cert-id').value = ebayCertId;
+            if (ebayUseSandbox) document.getElementById('ebay-use-sandbox').checked = true;
+            if (whatnotUsername) document.getElementById('whatnot-username').value = whatnotUsername;
+            
+            // If configuration exists, show the next steps
+            if (ebaySellerId && ebayAppId && ebayCertId) {
+                document.querySelector('.setup-form').classList.add('config-saved');
+            }
+        });
+        
+        // Save configuration when form is submitted
+        document.getElementById('setup-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const ebaySellerId = document.getElementById('ebay-seller-id').value.trim();
+            const ebayAppId = document.getElementById('ebay-app-id').value.trim();
+            const ebayDevId = document.getElementById('ebay-dev-id').value.trim();
+            const ebayCertId = document.getElementById('ebay-cert-id').value.trim();
+            const ebayUseSandbox = document.getElementById('ebay-use-sandbox').checked;
+            const whatnotUsername = document.getElementById('whatnot-username').value.trim();
+            
+            // Validate required fields
+            if (!ebaySellerId || !ebayAppId || !ebayCertId) {
+                alert('Please fill in all required eBay fields (Seller ID, App ID, and Cert ID).');
+                return;
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('ebay_seller_id', ebaySellerId);
+            localStorage.setItem('ebay_app_id', ebayAppId);
+            localStorage.setItem('ebay_dev_id', ebayDevId);
+            localStorage.setItem('ebay_cert_id', ebayCertId);
+            localStorage.setItem('ebay_use_sandbox', ebayUseSandbox.toString());
+            localStorage.setItem('whatnot_username', whatnotUsername);
+            
+            // Show the next steps
+            document.querySelector('.setup-form').classList.add('config-saved');
+            
+            // Scroll to next steps
+            document.querySelector('.next-steps').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

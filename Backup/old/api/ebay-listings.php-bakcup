@@ -1,0 +1,136 @@
+<?php
+// api/ebay-listings.php
+header('Content-Type: application/json');
+require_once '../config/config.php';
+require_once '../includes/functions.php';
+
+// Function to get eBay listings using the eBay API
+function getEbayListings() {
+    try {
+        // For quick testing, use dummy data
+         return getDummyListings();
+        
+        // Check if API credentials are set
+        if (empty(EBAY_APP_ID) || empty(EBAY_OAUTH_TOKEN)) {
+            return ['error' => 'eBay API credentials are not configured. Please set them in the admin panel.'];
+        }
+        
+        $appID = EBAY_APP_ID;
+        $devID = EBAY_DEV_ID;
+        $certID = EBAY_CERT_ID;
+        $oauthToken = EBAY_OAUTH_TOKEN;
+        
+        // API endpoint for Finding API
+        $endpoint = 'https://api.ebay.com/buy/browse/v1/item_summary/search';
+        
+        // Parameters - search for active listings by seller
+$params = [
+    'q' => 'sports cards',
+    'filter' => 'sellers:{' . EBAY_SELLER_ID . '}',  // Using the seller ID from config
+    'limit' => 12  // Get up to 12 listings
+];
+        // Log the request for debugging
+        error_log('eBay API Request: ' . $endpoint . '?' . http_build_query($params));
+        
+        // Create curl resource
+        $ch = curl_init();
+        
+        // Set curl options
+        curl_setopt_array($ch, [
+            CURLOPT_URL => $endpoint . '?' . http_build_query($params),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer ' . $oauthToken,
+                'X-EBAY-C-MARKETPLACE-ID: EBAY_US',
+                'Content-Type: application/json'
+            ],
+            CURLOPT_VERBOSE => 1,
+            CURLOPT_SSL_VERIFYPEER => false // Only for testing - remove in production
+        ]);
+        
+        // Execute curl and get response
+        $response = curl_exec($ch);
+        
+        // Check for errors
+        if (curl_errno($ch)) {
+            error_log('eBay API cURL Error: ' . curl_error($ch));
+            return ['error' => 'cURL error: ' . curl_error($ch)];
+        }
+        
+        // Get HTTP status code
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+        // Log the response for debugging
+        error_log('eBay API Response Code: ' . $httpCode);
+        error_log('eBay API Response: ' . substr($response, 0, 1000) . '...');
+        
+        // Close curl resource
+        curl_close($ch);
+        
+        // Check for HTTP error
+        if ($httpCode >= 400) {
+            return ['error' => 'HTTP error: ' . $httpCode . '. Response: ' . substr($response, 0, 100)];
+        }
+        
+        // Decode JSON response
+        $data = json_decode($response, true);
+        
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return ['error' => 'JSON parsing error: ' . json_last_error_msg()];
+        }
+        
+        // Extract and format listings
+        $listings = [];
+        
+        if (isset($data['itemSummaries']) && is_array($data['itemSummaries'])) {
+            foreach ($data['itemSummaries'] as $item) {
+                $listings[] = [
+                    'title' => $item['title'],
+                    'price' => isset($item['price']['value']) ? $item['price']['value'] : '0.00',
+                    'image' => isset($item['image']['imageUrl']) ? $item['image']['imageUrl'] : '',
+                    'viewItemURL' => $item['itemWebUrl'],
+                    'timeLeft' => isset($item['timeLeft']) ? formatTimeLeft($item['timeLeft']) : 'Ending soon',
+                    'bids' => isset($item['bidCount']) ? $item['bidCount'] : '0'
+                ];
+            }
+        } else {
+            // If no items found or unexpected response structure, use dummy data for now
+            return getDummyListings();
+        }
+        
+        return $listings;
+    } catch (Exception $e) {
+        error_log('eBay API Exception: ' . $e->getMessage());
+        return ['error' => 'Exception: ' . $e->getMessage()];
+    }
+}
+
+// Function to format time left
+function formatTimeLeft($timeLeft) {
+    // Example format: P0DT2H5M30S (0 days, 2 hours, 5 minutes, 30 seconds)
+    $timeLeft = str_replace(['P', 'T', 'H', 'M', 'S', 'D'], ['', '', ' hours ', ' minutes ', ' seconds', ' days '], $timeLeft);
+    return $timeLeft;
+}
+
+// Function to get dummy listings for testing
+function getDummyListings() {
+    $listings = [];
+    
+    // Add some dummy data
+    for ($i = 1; $i <= 6; $i++) {
+        $listings[] = [
+            'title' => "Sample Sports Card Listing #$i - 2023 Collection",
+            'price' => rand(10, 200) . '.' . rand(0, 99),
+            'image' => '../images/placeholder.jpg',
+            'viewItemURL' => '#',
+            'timeLeft' => rand(1, 5) . ' days ' . rand(1, 23) . ' hours',
+            'bids' => rand(0, 20)
+        ];
+    }
+    
+    return $listings;
+}
+
+// Get listings and return as JSON
+echo json_encode(getEbayListings());
+?>

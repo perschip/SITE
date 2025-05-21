@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tristate Cards</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <img src="img/logo.png" alt="Tristate Cards Logo" class="logo">
+        <h1>Tristate Cards</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="pages/about.html">About</a></li>
+                <li><a href="pages/contact.html">Contact</a></li>
+                <!-- <li><a href="setup.html">Setup</a></li> -->
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <div class="whatnot-status">
+            <span class="status-indicator" id="status-dot"></span>
+            <span id="live-status">Checking Whatnot status...</span>
+        </div>
+        
+        <h2>Current eBay Listings</h2>
+        <div class="listings" id="ebay-listings">
+            <div class="loading">Loading listings...</div>
+        </div>
+    </div>
+    
+    <footer>
+        &copy; <span id="current-year"></span> Tristate Cards. All Rights Reserved.
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/ebay-api.js"></script>
+    <script src="js/whatnot-api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if configuration exists
+            if (!localStorage.getItem('ebay_seller_id') || 
+                !localStorage.getItem('ebay_app_id') || 
+                !localStorage.getItem('ebay_cert_id')) {
+                
+                // Redirect to setup page if not configured
+                const setupNotice = document.createElement('div');
+                setupNotice.className = 'setup-notice';
+                setupNotice.innerHTML = `
+                    <h3>Website Not Configured</h3>
+                    <p>Please set up your eBay and Whatnot credentials to display your listings.</p>
+                    <a href="setup.html" class="view-button">Go to Setup Page</a>
+                `;
+                
+                document.querySelector('.container').insertBefore(
+                    setupNotice, 
+                    document.querySelector('.whatnot-status')
+                );
+            }
+        });
+    </script>
+</body>
+</html>
